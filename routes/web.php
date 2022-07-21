@@ -26,3 +26,13 @@ require __DIR__.'/auth.php';
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// test role
+
+Route::group(['middleware' => ['role:admin']], function () {
+    Route::get('/test', function(){
+        return view('test');
+    });    //
+});
+
+
