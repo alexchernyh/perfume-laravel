@@ -27,12 +27,13 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-// test role
+// Доступ к главной странице в админ панели
+Route::middleware(['role:admin'])->prefix('admin_panel')->group( function () {
+    Route::get('/', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('homeAdmin');
 
-Route::group(['middleware' => ['role:admin']], function () {
-    Route::get('/test', function(){
-        return view('test');
-    });    //
+    Route::resource('partners', App\Http\Controllers\Admin\PartnerController::class);
+
 });
+
 
 
