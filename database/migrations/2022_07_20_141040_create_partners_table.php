@@ -17,14 +17,14 @@ class CreatePartnersTable extends Migration
             $table->id();
             // $table->unsignedBigInteger('user_id');
             $table->string('first_name');
-            $table->string('mid_name');
+            $table->string('mid_name')->nullable();;
             $table->string('last_name')->index();
             $table->string('email')->unique();
             $table->string('phone')->unique();
-            $table->decimal('reward_total',14,4);  // сумма вознаграждения
-            $table->decimal('orders_total',14,4);  // сумма заказов за месяц
-            $table->unsignedBigInteger('invited_id');
-            $table->unsignedBigInteger('partner_id_ecom'); // id пользователя в ИМ где сделал заказ
+            $table->decimal('reward_total',14,4)->nullable();;  // сумма вознаграждения
+            $table->decimal('orders_total',14,4)->nullable();;  // сумма заказов за месяц
+            $table->unsignedBigInteger('invited_id')->nullable();;
+            $table->unsignedBigInteger('partner_id_ecom')->nullable();; // id пользователя в ИМ где сделал заказ
             $table->timestamps();
 
             $table->foreignId('user_id')->constrained()->onDelete('cascade');

@@ -1,3 +1,6 @@
+
+<!-- Страница добавления нового партнера -->
+
 @extends('layouts.admin_layout');
 
 @section('title', "Добавить партнера");
@@ -16,77 +19,105 @@
           	<div class="card">
               <div class="card-header">
               	<div class="row">
-              		<div class="col-md-9"><h3 class="card-title">Добавить партнера</h3></div>
-              		<!-- <div class="col-md-3">
-              			<button type="button" class="btn btn-block btn-secondary btn-sm"><i class="fa fa-user-plus"></i> Добавить</button>
-              		</div> -->
+              		<div class="col-md-9">
+                    <h3 class="card-title">Добавить партнера</h3>
+                  </div>
               	</div>
+                <div class="row">
+                  <div class="col-md-6">
+                    @if (session('success'))
+                      <div class="alert alert-success alert-dismissible mt-3">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <h5><i class="icon fas fa-check"></i> Успешно!</h5>
+                        {{ session('success') }}
+                      </div>
+                    @endif  
+                  </div>
+                </div>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <form>
+                <form action="{{route('partners.store')}}" method="POST">
+                  @csrf
                 <div class="card-body">
                 	<div class="row">
                 		<div class="col-md-4">
-                			<div class="form-group">
-			                    <label for="exampleInputEmail1">Введите фамилию</label>
-			                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Фамилия">
+                			<div class="form-group required">
+			                    <label for="inpSurname">Введите фамилию</label>
+			                    <input type="text" name="last_name" class="form-control" id="inpSurname" placeholder="Фамилия" required>
 			                  </div>							
                 		</div>
                 		<div class="col-md-4">
-                			<div class="form-group">
-                    <label for="exampleInputEmail1">Введите имя</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Имя">
+                			<div class="form-group required">
+                    <label for="inpName">Введите имя</label>
+                    <input type="text" name="first_name" class="form-control" id="inpName" placeholder="Имя" required>
                   </div>
                 		</div>
                 		<div class="col-md-4">
                 			<div class="form-group">
-		                    <label for="exampleInputEmail1">Введите отчество</label>
-		                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Отчество">
+		                    <label for="inpMiddlename">Введите отчество</label>
+		                    <input type="text" name="mid_name" class="form-control" id="inpMiddlename" placeholder="Отчество">
 		                  </div>
                 		</div>
                 	</div>
                 	<div class="row">
                 		<div class="col-md-6">
-                			<div class="form-group">
-			                    <label for="exampleInputEmail1">Телефон</label>
-			                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="+7(951)9992233">
+                			<div class="form-group required">
+			                    <label for="inpPhone">Телефон</label>
+			                    <input type="text" name="phone" class="form-control" id="inpPhone" placeholder="+7(951)9992233">
 			                  </div>
                 		</div>
                 	</div>
                 	<div class="row">
                 		<div class="col-md-6">
-                			<div class="form-group">
-			                    <label for="exampleInputEmail1">Почта (email)</label>
-			                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                			<div class="form-group required">
+			                    <label for="inpEmail">Почта (email)</label>
+			                    <input type="text" name="email" class="form-control" id="inpEmail" placeholder="Email также является логином для входа пользователя" required>
 			                  </div>
                 		</div>
                 	</div>
-			        
-
-
-                  
-                  
-                  
-                  <!-- <div class="form-group">
-                    <label for="exampleInputPassword1">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                  </div> -->
-                  <!-- <div class="form-group">
-                    <label for="exampleInputFile">File input</label>
-                    <div class="input-group">
-                      <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="exampleInputFile">
-                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                      </div>
-                      <div class="input-group-append">
-                        <span class="input-group-text">Upload</span>
-                      </div>
+                  <!-- <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group ">
+                          <label for="inpInvitedId">ID партнера</label>
+                          <input type="text" name="user_id" class="form-control" id="inpInvitedId" placeholder="ID партнера" required>
+                        </div>
                     </div>
                   </div> -->
-                  <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                          <label for="inpInvitedId">ID пригласившего</label>
+                          <input type="text" name="reward_total" class="form-control" id="inpInvitedId" placeholder="ID пригласившего этого партнера в программу">
+                        </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group required">
+                          <label for="inpInvitedId">Пароль для входа</label>
+                          <input type="text" name="password" class="form-control" id="inpInvitedId" placeholder="Пароль для входа пользователя на сайт" required>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                          <label for="inpInvitedId">Бонусы на счете партнера</label>
+                          <input type="text" name="reward_total" class="form-control" id="inpInvitedId" placeholder="ID пригласившего этого партнера в программу">
+                        </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                          <label for="inpInvitedId">Сумма заказов</label>
+                          <input type="text" name="orders_total" class="form-control" id="inpInvitedId" placeholder="ID пригласившего этого партнера в программу">
+                        </div>
+                    </div>
                   </div>
                 </div>
                 <!-- /.card-body -->
