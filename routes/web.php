@@ -33,6 +33,8 @@ Route::middleware(['role:admin'])->prefix('admin_panel')->group( function () {
 
     Route::resource('partners', App\Http\Controllers\Admin\PartnerController::class);
 
+    Route::resource('partner_category', App\Http\Controllers\Admin\PartnerCategoryController::class);
+
 });
 
 

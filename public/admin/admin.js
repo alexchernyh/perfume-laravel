@@ -9,21 +9,30 @@ $(document).ready(function () {
         }
     });
 
-    $('.delete-btn').click(function () {
-        var res = confirm('Подтвердите действия');
+    /*Todo: продолжить тут https://youtu.be/Ouz5Pb8FlZI?t=418*/
+
+    $('.js-delete-btn').click(function () {
+        var res = confirm('Вы уверены что хотите удалить?');
         if(!res){
             return false;
         }
     });
+
+    /*Маска ввода номера телефона*/
+    $(".js-phone").mask("+7(999) 999-99-99").on('click', function(){
+      if($(this).val() === "+7(___) ___-__-__") {
+        $(this).get(0).setSelectionRange(3,3);  
+      }
+    });
 })
 
-tinymce.init({
-    selector: '.editor',
-    plugins: 'advlist autolink lists link image charmap print preview hr anchor pagebreak',
-    toolbar_mode: 'floating',
-    relative_urls : false,
-    file_picker_callback : elFinderBrowser
-});
+// tinymce.init({
+//     selector: '.editor',
+//     plugins: 'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+//     toolbar_mode: 'floating',
+//     relative_urls : false,
+//     file_picker_callback : elFinderBrowser
+// });
    
    function elFinderBrowser (callback, value, meta) {
     tinymce.activeEditor.windowManager.openUrl({

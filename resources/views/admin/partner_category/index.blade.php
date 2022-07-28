@@ -3,7 +3,7 @@
 
 @extends('layouts.admin_layout');
 
-@section('title', "Партнеры");
+@section('title', "Категории партнеров");
 
 
 @section('content')
@@ -19,23 +19,13 @@
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <!-- <h3 class="card-title">Список партнеров</h3> -->
-
-                <!-- <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                    <i class="fas fa-minus"></i>
-                  </button>
-                  <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-                    <i class="fas fa-times"></i>
-                  </button>
-                </div> -->
+                
                 <div class="row">
-                  <div class="col-md-9"><h3 class="card-title">Список партнеров <span class="text-muted">({{$partners_count}})</span></h3></div>
+                  <div class="col-md-9"><h3 class="card-title">Категории партнеров <span class="text-muted">({{ $list_count }})</span></h3></div>
                   <div class="col-md-3">
-                    <a href="{{ route('partners.create') }}" class="btn btn-block btn-secondary btn-sm"><i class="fa fa-user-plus"></i> Добавить</a>
+                    <a href="{{ route('partner_category.create') }}" class="btn btn-block btn-secondary btn-sm"><i class="fa fa-user-plus"></i> Добавить</a>
                   </div>
                 </div>
-
                 @if (session('success'))
                 <div class="row">
                   <div class="col-md-6">
@@ -56,23 +46,14 @@
                             <th style="width: 1%">
                                 ID
                             </th>
-                            <th style="width: 10%">
-                                ФИО
+                            <th style="width: 15%">
+                                Название
                             </th>
                             <th style="width: 10%">
-                                Email
+                                Скидка (%)
                             </th>
                             <th style="width: 10%">
-                                Телефон
-                            </th>
-                            <th style="width: 10%">
-                                Группа
-                            </th>
-                            <th style="width: 10%">
-                                Сумма заказов
-                            </th>
-                            <th style="width: 10%">
-                                Сумма бонусов
+                                Описание
                             </th>
                             <th style="width: 20%">
                             </th>
@@ -80,48 +61,37 @@
                     </thead>
                     <tbody>
 
-                      @foreach ($partners as $partner)
+                      @foreach ($list as $item)
                         
                         <tr>
                             <td>
-                                {{ $partner['user_id'] }}
+                                {{ $item['id'] }}
                             </td>
                             <td>
                                 <a>
-                                    {{ $partner['last_name'] }} {{ $partner['first_name'] }} {{ $partner['mid_name'] }}
+                                    {{ $item['category_name'] }}
                                 </a>
                                 <br/>
                                 <small class="text-muted">
-                                    Создан {{ date('d-m-Y', strtotime($partner['created_at'])) }}
+                                    Создан {{ date('d-m-Y', strtotime($item['created_at'])) }}
                                 </small>
                             </td>
                             <td>
-                                {{ $partner['email'] }}
+                                {{ $item['category_discount'] }}
                             </td>
                             <td>
-                                {{ $partner['phone'] }}
+                                {{ $item['category_description'] }}
                             </td>
-                            <td>
-                                @foreach ($cat_list as $item)
-                                    @if($partner['partner_categories_id'] == $item['id'])
-                                      {{ $item['category_name'] }} - {{ $item['category_discount'] }}%
-                                    @endif
-                                @endforeach
-                            </td>
-                            <td>
-                                {{ number_format($partner['orders_total'], 2) }} ₽
-                            </td>
-                            <td>
-                                {{ number_format($partner['reward_total'], 2) }} ₽
-                            </td>
+                            
                             <td class="project-actions text-right">
                                 
-                                <a class="btn btn-info btn-sm" href="{{ route('partners.edit', $partner['id']) }}">
+                                
+                                <a class="btn btn-info btn-sm" href="{{ route('partner_category.edit', $item['id']) }}">
                                     <i class="fas fa-pencil-alt">
                                     </i>
                                     Редактировать
                                 </a>
-                                <form action="{{ route('partners.destroy', $partner['id']) }}" style="display: inline;" method="POST">
+                                <form action="{{ route('partner_category.destroy', $item['id']) }}" style="display: inline;" method="POST">
                                   @csrf
                                   @method('DELETE')
                                   <button class="btn btn-danger btn-sm js-delete-btn">
@@ -133,6 +103,9 @@
                             </td>
                         </tr>  
                       @endforeach
+
+
+
                     </tbody>
                 </table>
               </div>
@@ -141,12 +114,6 @@
             <!-- /.card -->
             </div>
       </div>
-
-      <div class="row">
-        <div class="col-md-12">
-          {{ $partners->links() }}
-        </div>
-      </div>   
 
 
         <!-- /.row (main row) -->
