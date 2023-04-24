@@ -80,6 +80,20 @@ class PartnerController extends Controller
             ]);
             $user->assignRole('user');
 
+            $reward_total = str_replace(",", ".", $request->reward_total);
+            $reward_total = floatval($reward_total);
+
+            $expected_reward_total = str_replace(",", ".", $request->expected_reward_total);
+            $expected_reward_total = floatval($expected_reward_total);
+
+            $orders_total = str_replace(",", ".", $request->orders_total);
+            $orders_total = floatval($orders_total);
+
+            $group_orders_total = str_replace(",", ".", $request->group_orders_total);
+            $group_orders_total = floatval($group_orders_total);    
+
+            $group_orders_total_all_time = str_replace(",", ".", $request->group_orders_total_all_time);
+            $group_orders_total_all_time = floatval($group_orders_total_all_time);   
 
             // добавление партнера
             $new_partner = new Partner();
@@ -92,11 +106,13 @@ class PartnerController extends Controller
             $new_partner->partner_categories_id = $request->partner_categories_id; //TODO: здесь вставить id из user
             $new_partner->invited_id = $request->invited_id;
             $new_partner->city = $request->city;
-            $new_partner->reward_total = $request->reward_total;
-            $new_partner->expected_reward_total = $request->expected_reward_total;
-            $new_partner->orders_total = $request->orders_total;
-            $new_partner->group_orders_total = $request->group_orders_total;
-            $new_partner->group_orders_total_all_time = $request->group_orders_total_all_time;
+            $new_partner->project1_category = $request->project1_category;
+            $new_partner->project2_category = $request->project2_category;
+            $new_partner->reward_total = $reward_total;
+            $new_partner->expected_reward_total = $expected_reward_total;
+            $new_partner->orders_total = $orders_total;
+            $new_partner->group_orders_total = $group_orders_total;
+            $new_partner->group_orders_total_all_time = $group_orders_total_all_time;
             $new_partner->save();
 
             return redirect()->back()->withSuccess('Новый партнер добавлен');  

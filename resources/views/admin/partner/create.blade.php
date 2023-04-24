@@ -100,20 +100,16 @@
                       <div class="form-group">
                         <label>Выберите группу партнера в проекте bionikks.ru</label>
                         <select class="form-control" name="project2_category">
-                          
                           @for ($i = 0; $i < count($cat_list); $i++)
                             @if($i == 0)
-                              <option value="0" {{ $partner["project2_category"]==0 ? 'selected' : '' }}> - Не выбрана - </option>
+                              <option value="0"> - Не выбрана - </option>
                             @endif
 
                             @if($cat_list[$i]['shop_id'] == 2) 
-                              @if($partner['project2_category'] == $cat_list[$i]['id'])
-                                <option value="{{$cat_list[$i]['id']}}" selected>{{ $cat_list[$i]['category_name'] }} - {{ formatSum($cat_list[$i]['category_discount']) }}%</option>
-                              @else
                                 <option value="{{$cat_list[$i]['id']}}">{{ $cat_list[$i]['category_name'] }} - {{ formatSum($cat_list[$i]['category_discount']) }}%</option>
-                              @endif
                             @endif
                           @endfor
+                        </select>
                         </select>
                       </div>    
                     </div>
@@ -126,15 +122,11 @@
                         <select class="form-control" name="project1_category">
                           @for ($i = 0; $i < count($cat_list); $i++)
                             @if($i == 0)
-                              <option value="0" {{ $partner["project1_category"]==0 ? 'selected' : '' }}> - Не выбрана - </option>
+                              <option value="0"> - Не выбрана - </option>
                             @endif
 
                             @if($cat_list[$i]['shop_id'] == 1) 
-                              @if($partner['project1_category'] == $cat_list[$i]['id'])
-                                <option value="{{$cat_list[$i]['id']}}" selected>{{ $cat_list[$i]['category_name'] }} - {{ formatSum($cat_list[$i]['category_discount']) }}%</option>
-                              @else
-                                <option value="{{$cat_list[$i]['id']}}">{{ $cat_list[$i]['category_name'] }} - {{ formatSum($cat_list[$i]['category_discount']) }}%</option>
-                              @endif
+                              <option value="{{$cat_list[$i]['id']}}">{{ $cat_list[$i]['category_name'] }} - {{ formatSum($cat_list[$i]['category_discount']) }}%</option>
                             @endif
                           @endfor
                         </select>
