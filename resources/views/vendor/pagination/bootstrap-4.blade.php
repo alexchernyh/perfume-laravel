@@ -1,7 +1,7 @@
 @if ($paginator->hasPages())
     <div class="dataTables_paginate paging_simple_numbers">
         <nav>
-            <ul class="pagination 123">
+            <ul class="pagination">
                 {{-- Previous Page Link --}}
                 @if ($paginator->onFirstPage())
                     <li class="page-item disabled" aria-disabled="true" aria-label="@lang('pagination.previous')">

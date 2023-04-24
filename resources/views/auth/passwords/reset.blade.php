@@ -1,4 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.app_layout', ['title' => 'Установка нового пароля'])
+
+
+@section('title', 'Установка нового пароля')
 
 @section('content')
 <div class="container">

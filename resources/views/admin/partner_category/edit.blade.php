@@ -1,9 +1,9 @@
 
 <!-- Страница добавления нового партнера -->
 
-@extends('layouts.admin_layout');
+@extends('layouts.admin_layout')
 
-@section('title', "Редактирование группы партнера");
+@section('title', "Редактирование группы партнера")
 
 
 @section('content')
@@ -56,11 +56,98 @@
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
+                          <label for="inpDiscount">Интернет магазин</label>
+                          <select class="form-control" name="shop_id">
+                            @foreach($shops as $shop)
+                              @if($partnerCategory['shop_id'] == $shop->id)
+                                <option value="{{ $shop->id }}" selected>{{ $shop->title }}</option>
+                              @else  
+                                <option value="{{ $shop->id }}">{{ $shop->title }}</option>
+                              @endif
+                            @endforeach
+                        </select>
+                        </div>
+                    </div>
+                  </div>
+                <!--   <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                          <label for="inpDiscount">Скидка (%) в perfumetinctures.com</label>
+                          <input type="text" name="project1_discount" value="{{ $partnerCategory['project1_discount'] }}" class="form-control" id="inpDiscount" placeholder="">
+                        </div>
+                    </div>
+                  </div> -->
+                  <!-- <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                          <label for="inpDiscount">Скидка (%) в bionikks.ru</label>
+                          <input type="text" name="project2_discount" value="{{ $partnerCategory['project2_discount'] }}" class="form-control" id="inpDiscount" placeholder="">
+                        </div>
+                    </div>
+                  </div> -->
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
                           <label for="inpDiscount">Скидка (%)</label>
                           <input type="text" name="category_discount" value="{{ $partnerCategory['category_discount'] }}" class="form-control" id="inpDiscount" placeholder="">
                         </div>
                     </div>
                   </div>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                          <label for="inpDiscount">Уровень участия</label>
+                          <select class="form-control" name="level">
+                          @php 
+                            $count_group = 6;
+                          @endphp
+                          @for ($i = 1; $i <= $count_group; $i++)
+                            @if($partnerCategory['level'] == $i)
+                              <option value="{{ $i }}" selected>{{ $i }}</option>
+                            @else
+                              <option value="{{ $i }}">{{ $i }}</option>
+                            @endif
+                          @endfor
+                        </select>
+                        </div>
+                    </div>
+                  </div>
+                  <!-- <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                          <label for="inpDiscount">Уровень в bionikks.ru</label>
+                          <select class="form-control" name="project2_level">
+                          @for ($i = 1; $i <= $count_group; $i++)
+                            @if($partnerCategory['project2_level'] == $i)
+                              <option value="{{ $i }}" selected>{{ $i }}</option>
+                            @endif
+                              <option value="{{ $i }}">{{ $i }}</option>
+                          @endfor
+                        </select>
+                        </div>
+                    </div>
+                  </div> -->
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                          <label for="inpDiscount">Групповой объем (ГО)</label>
+                          <input type="text" name="GO_total" value="{{ $partnerCategory['GO_total'] }}" class="form-control" id="inpDiscount" placeholder="">
+                        </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                          <label for="inpDiscount">Накопленный структурный объем (НСО)</label>
+                          <input type="text" name="NSO_total" value="{{ $partnerCategory['NSO_total'] }}" class="form-control" id="inpDiscount" placeholder="">
+                        </div>
+                    </div>
+                  </div>
+
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
@@ -75,7 +162,7 @@
               <!-- /.card-body -->
                <div class="card-footer">
                   <a href="{{ route('partner_category.index') }}" class="btn btn-secondary mr-3">Отмена</a>
-                  <button type="submit" class="btn btn-primary">Добавить</button>
+                  <button type="submit" class="btn btn-primary">Сохранить</button>
                 </div>
               </form>
             </div>

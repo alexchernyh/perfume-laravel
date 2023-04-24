@@ -1,9 +1,9 @@
 
 <!-- Страница добавления нового партнера -->
 
-@extends('layouts.admin_layout');
+@extends('layouts.admin_layout')
 
-@section('title', "Добавить группу");
+@section('title', "Добавить группу")
 
 
 @section('content')
@@ -49,14 +49,68 @@
                 		</div>
                 		
                 	</div>
-                	<div class="row">
-                		<div class="col-md-6">
-                			<div class="form-group">
-			                    <label for="inpDiscount">Скидка (%)</label>
-			                    <input type="text" name="category_discount" class="form-control" id="inpDiscount" placeholder="">
-			                  </div>
-                		</div>
-                	</div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                          <label for="inpDiscount">Скидка (%) в perfumetinctures.com</label>
+                          <input type="text" name="project1_discount" class="form-control" id="inpDiscount" placeholder="">
+                        </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                          <label for="inpDiscount">Скидка (%) в bionikks.ru</label>
+                          <input type="text" name="project2_discount" class="form-control" id="inpDiscount" placeholder="">
+                        </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                          <label for="inpDiscount">Уровень в perfumetinctures.com</label>
+                          <select class="form-control" name="project1_level">
+                          @php 
+                            $count_group = 6;
+                          @endphp
+                          @for ($i = 1; $i <= $count_group; $i++)
+                             <option value="{{ $i }}">{{ $i }}</option> 
+                          @endfor
+                        </select>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                          <label for="inpDiscount">Уровень в bionikks.ru</label>
+                          <select class="form-control" name="project2_level">
+                          @for ($i = 1; $i <= $count_group; $i++)
+                             <option value="{{ $i }}">{{ $i }}</option> 
+                          @endfor
+                        </select>
+                        </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                          <label for="inpDiscount">Групповой объем (ГО)</label>
+                          <input type="text" name="GO_total" class="form-control" id="inpDiscount" placeholder="">
+                        </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                          <label for="inpDiscount">Накопленный структурный объем (НСО)</label>
+                          <input type="text" name="NSO_total" class="form-control" id="inpDiscount" placeholder="">
+                        </div>
+                    </div>
+                  </div>
+
                 	<div class="row">
                 		<div class="col-md-6">
                 			<div class="form-group">

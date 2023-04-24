@@ -3,6 +3,7 @@
 namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
+use App\Http\Controllers\Cronjob\UpdatePartnersInfo;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
@@ -16,7 +17,15 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+
+        $filePath = __DIR__."\log.txt";
+        // var_dump($filePath);
+        $schedule->call(new UpdatePartnersInfo)
+         ->everyMinute()
+         ->sendOutputTo($filePath);
     }
+
+
 
     /**
      * Register the commands for the application.

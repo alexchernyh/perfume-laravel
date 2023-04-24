@@ -2,3 +2,51 @@
   content:"*";
   color:red !important;
 }
+
+
+.content-wrapper>.content {
+    padding: 0 0.5rem;
+    padding-top: 2rem;
+}
+
+.operation_list__revenue {
+  color: #0E9594;
+}
+
+.operation_list__spending {
+  color: #f2542d;
+}
+
+.js-ajax-loading {
+   /*width: 23px;
+   height: 23px;
+   border: 5.2px #140f2d double;
+   border-left-style: solid;
+   border-radius: 50%;
+   animation: spinner-aib1d7 0.75s infinite linear;*/
+   display: none;
+   width: 23px;
+   height: 23px;
+   border-radius: 50%;
+   border: 4.5px solid;
+   border-color: #dbdcef;
+   border-right-color: #190B28;
+   animation: spinner-d3wgkg 1s infinite linear;
+
+
+   position: absolute;
+   right: 10px;
+   top: 8px;
+}
+
+@keyframes spinner-aib1d7 {
+   to {
+      transform: rotate(360deg);
+   }
+}
+
+@keyframes spinner-d3wgkg {
+   to {
+      transform: rotate(1turn);
+   }
+}

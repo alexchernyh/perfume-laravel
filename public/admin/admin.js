@@ -11,7 +11,14 @@ $(document).ready(function () {
 
     /*Todo: продолжить тут https://youtu.be/Ouz5Pb8FlZI?t=418*/
 
-    $('.js-delete-btn').click(function () {
+    /*$('.js-delete-btn').click(function () {
+        var res = confirm('Вы уверены что хотите удалить?');
+        if(!res){
+            return false;
+        }
+    });*/
+
+    $('.js-delete-btn').on('click', function () {
         var res = confirm('Вы уверены что хотите удалить?');
         if(!res){
             return false;
@@ -24,7 +31,83 @@ $(document).ready(function () {
         $(this).get(0).setSelectionRange(3,3);  
       }
     });
+
 })
+
+tinymce.init({
+  selector: '.editor',
+  height: 500,
+  plugins: [
+    'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
+    'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
+    'insertdatetime', 'media', 'table', 'help', 'wordcount'
+  ],
+  toolbar: 'undo redo | blocks | ' +
+  'bold italic backcolor | alignleft aligncenter ' +
+  'alignright alignjustify | bullist numlist outdent indent | ' +
+  'removeformat | help',
+  content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }'
+});
+
+
+// редактор tinymce
+    /*tinymce.init({
+      selector: '.editor',
+      plugins: 'a11ychecker advcode casechange export formatpainter image editimage linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tableofcontents tinycomments tinymcespellchecker',
+      toolbar: 'a11ycheck addcomment showcomments casechange checklist code export formatpainter image editimage pageembed permanentpen table tableofcontents',
+      toolbar_mode: 'floating',
+      tinycomments_mode: 'embedded',
+      tinycomments_author: 'Author name',
+    });*/
+
+/*tinymce.init({
+  selector: '.editor',
+  height: 500,
+  menu: {
+    file: { title: 'File', items: 'newdocument restoredraft | preview | export print | deleteallconversations' },
+    edit: { title: 'Edit', items: 'undo redo | cut copy paste pastetext | selectall | searchreplace' },
+    view: { title: 'View', items: 'code | visualaid visualchars visualblocks | spellchecker | preview fullscreen | showcomments' },
+    insert: { title: 'Insert', items: 'image link media addcomment pageembed template codesample inserttable | charmap emoticons hr | pagebreak nonbreaking anchor tableofcontents | insertdatetime' },
+    format: { title: 'Format', items: 'bold italic underline strikethrough superscript subscript codeformat | styles blocks fontfamily fontsize align lineheight | forecolor backcolor | language | removeformat' },
+    tools: { title: 'Tools', items: 'spellchecker spellcheckerlanguage | a11ycheck code wordcount' },
+    table: { title: 'Table', items: 'inserttable | cell row column | advtablesort | tableprops deletetable' },
+    help: { title: 'Help', items: 'help' }
+  },
+  plugins: [
+    'advlist autolink lists link image charmap print preview anchor',
+    'searchreplace visualblocks code fullscreen',
+    'insertdatetime media table paste contextmenu code help wordcount'
+  ],
+  toolbar: 'undo redo | formatselect | ' +
+  'bold italic backcolor | alignleft aligncenter ' +
+  'alignright alignjustify | bullist numlist outdent indent | ' +
+  'removeformat | help',
+  content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+});
+
+tinymce.init({
+  selector: 'textarea#basic-example',
+  height: 500,
+  plugins: [
+    'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
+    'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
+    'insertdatetime', 'media', 'table', 'help', 'wordcount'
+  ],
+  toolbar: 'undo redo | blocks | ' +
+  'bold italic backcolor | alignleft aligncenter ' +
+  'alignright alignjustify | bullist numlist outdent indent | ' +
+  'removeformat | help',
+  content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }'
+});*/
+
+/*tinymce.init({
+      selector: '.editor',
+      plugins: 'a11ychecker advcode casechange export formatpainter image editimage linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tableofcontents tinycomments tinymcespellchecker',
+      toolbar: 'a11ycheck addcomment showcomments casechange checklist code export formatpainter image editimage pageembed permanentpen table tableofcontents',
+      toolbar_mode: 'floating',
+      tinycomments_mode: 'embedded',
+      tinycomments_author: 'Author name',
+    });*/
 
 // tinymce.init({
 //     selector: '.editor',

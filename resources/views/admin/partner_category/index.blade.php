@@ -53,6 +53,15 @@
                                 Скидка (%)
                             </th>
                             <th style="width: 10%">
+                                Интернет магазин
+                            </th>
+                            <th style="width: 10%">
+                                Уровень участия
+                            </th>
+                            <!-- <th style="width: 10%">
+                                Уровень в bionikks.ru
+                            </th> -->
+                            <th style="width: 10%">
                                 Описание
                             </th>
                             <th style="width: 20%">
@@ -64,7 +73,7 @@
                       @foreach ($list as $item)
                         
                         <tr>
-                            <td>
+                            <td class="text-muted">
                                 {{ $item['id'] }}
                             </td>
                             <td>
@@ -77,8 +86,15 @@
                                 </small>
                             </td>
                             <td>
-                                {{ $item['category_discount'] }}
+                                {{ number_format($item['category_discount'],0,"","") }}
                             </td>
+                            <td>
+                                {{ $item->shop->title }}
+                            </td>
+                            <td>
+                                {{ $item['level'] }}
+                            </td>
+                            
                             <td>
                                 {{ $item['category_description'] }}
                             </td>
@@ -86,18 +102,18 @@
                             <td class="project-actions text-right">
                                 
                                 
-                                <a class="btn btn-info btn-sm" href="{{ route('partner_category.edit', $item['id']) }}">
+                                <a class="btn btn-info btn-sm" href="{{ route('partner_category.edit', $item['id']) }}" title="Редактировать">
                                     <i class="fas fa-pencil-alt">
                                     </i>
-                                    Редактировать
+                                    
                                 </a>
                                 <form action="{{ route('partner_category.destroy', $item['id']) }}" style="display: inline;" method="POST">
                                   @csrf
                                   @method('DELETE')
-                                  <button class="btn btn-danger btn-sm js-delete-btn">
+                                  <button class="btn btn-danger btn-sm js-delete-btn" title="Удалить">
                                       <i class="fas fa-trash">
                                       </i>
-                                      Удалить
+                                      
                                   </button>
                                 </form>
                             </td>

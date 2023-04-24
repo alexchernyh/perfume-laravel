@@ -13,8 +13,8 @@ return [
     |
     */
 
-    'failed' => 'These credentials do not match our records.',
-    'password' => 'The provided password is incorrect.',
+    'failed' => 'Ошибка: Неверный логин или пароль',
+    'password' => 'Ошибка: Пароль неверный',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-
+    'Reset Password Notification' => 'Сброс пароля личного кабинета'
 ];

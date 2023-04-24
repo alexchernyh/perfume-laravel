@@ -1,9 +1,9 @@
 
 <!-- Страница добавления нового партнера -->
 
-@extends('layouts.admin_layout');
+@extends('layouts.admin_layout')
 
-@section('title', "Добавить партнера");
+@section('title', "Добавить партнера")
 
 
 @section('content')
@@ -98,25 +98,59 @@
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label>Выберите группу партнера</label>
-                        <select class="form-control" name="partner_categories_id">
-                          @foreach ($cat_list as $item)
-                            <option value="{{$item['id']}}">{{ $item['category_name'] }} - {{ $item['category_discount'] }}%</option>
-                          @endforeach
+                        <label>Выберите группу партнера в проекте bionikks.ru</label>
+                        <select class="form-control" name="project2_category">
+                          
+                          @for ($i = 0; $i < count($cat_list); $i++)
+                            @if($i == 0)
+                              <option value="0" {{ $partner["project2_category"]==0 ? 'selected' : '' }}> - Не выбрана - </option>
+                            @endif
+
+                            @if($cat_list[$i]['shop_id'] == 2) 
+                              @if($partner['project2_category'] == $cat_list[$i]['id'])
+                                <option value="{{$cat_list[$i]['id']}}" selected>{{ $cat_list[$i]['category_name'] }} - {{ formatSum($cat_list[$i]['category_discount']) }}%</option>
+                              @else
+                                <option value="{{$cat_list[$i]['id']}}">{{ $cat_list[$i]['category_name'] }} - {{ formatSum($cat_list[$i]['category_discount']) }}%</option>
+                              @endif
+                            @endif
+                          @endfor
+                        </select>
+                      </div>    
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Выберите группу партнера в проекте perfumetinctures.com</label>
+                        <select class="form-control" name="project1_category">
+                          @for ($i = 0; $i < count($cat_list); $i++)
+                            @if($i == 0)
+                              <option value="0" {{ $partner["project1_category"]==0 ? 'selected' : '' }}> - Не выбрана - </option>
+                            @endif
+
+                            @if($cat_list[$i]['shop_id'] == 1) 
+                              @if($partner['project1_category'] == $cat_list[$i]['id'])
+                                <option value="{{$cat_list[$i]['id']}}" selected>{{ $cat_list[$i]['category_name'] }} - {{ formatSum($cat_list[$i]['category_discount']) }}%</option>
+                              @else
+                                <option value="{{$cat_list[$i]['id']}}">{{ $cat_list[$i]['category_name'] }} - {{ formatSum($cat_list[$i]['category_discount']) }}%</option>
+                              @endif
+                            @endif
+                          @endfor
                         </select>
                       </div>    
                     </div>
                   </div>
 
                   
-                  <!-- <div class="row">
+                  <div class="row">
                     <div class="col-md-6">
-                      <div class="form-group ">
-                          <label for="inpInvitedId">ID партнера</label>
-                          <input type="text" name="user_id" class="form-control" id="inpInvitedId" placeholder="ID партнера" required>
-                        </div>
+                      <div class="form-group">
+                          <label for="inpInvitedId">Город</label>
+                          <input type="text" name="city" value="{{ old('city') }}" class="form-control" id="inpInvitedId" placeholder="Город">
+                      </div>
                     </div>
-                  </div> -->
+                  </div>
 
                   <div class="row">
                     <div class="col-md-6">
@@ -139,8 +173,8 @@
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
-                          <label for="inpInvitedId">Бонусы на счете партнера</label>
-                          <input type="text" name="reward_total" value="{{ old('reward_total') }}" class="form-control" id="inpInvitedId" placeholder="Текущий бонусный счет партнера">
+                          <label for="inpInvitedId">Доступные для оплаты бонусы</label>
+                          <input type="text" name="reward_total" value="{{ old('reward_total') }}" class="form-control" id="inpInvitedId" placeholder="">
                         </div>
                     </div>
                   </div>
@@ -148,11 +182,40 @@
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
-                          <label for="inpInvitedId">Сумма заказов</label>
-                          <input type="text" name="orders_total" value="{{ old('orders_total') }}" class="form-control" id="inpInvitedId" placeholder="Сумма заказов партнера">
+                          <label for="inpInvitedId">Ожидающие зачисления бонусы</label>
+                          <input type="text" name="expected_reward_total" value="{{ old('expected_reward_total') }}" class="form-control" id="inpInvitedId" placeholder="">
                         </div>
                     </div>
                   </div>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                          <label for="inpInvitedId">Личный объем (ЛО)</label>
+                          <input type="text" name="orders_total" value="{{ old('orders_total') }}" class="form-control" id="inpInvitedId" placeholder="">
+                        </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                          <label for="inpInvitedId">Групповой объем (ЛО+заказы партнеров)</label>
+                          <input type="text" name="group_orders_total" value="{{ old('group_orders_total') }}" class="form-control" id="inpInvitedId" placeholder="">
+                        </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                          <label for="inpInvitedId">Накопленный структурный объем (НСО)</label>
+                          <input type="text" name="group_orders_total_all_time" value="{{ old('group_orders_total_all_time') }}" class="form-control" id="inpInvitedId" placeholder="">
+                        </div>
+                    </div>
+                  </div>
+
+
                 </div>
                 <!-- /.card-body -->
 

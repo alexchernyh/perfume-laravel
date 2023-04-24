@@ -125,7 +125,7 @@ return [
     'starts_with' => 'The :attribute must start with one of the following: :values.',
     'string' => 'The :attribute must be a string.',
     'timezone' => 'The :attribute must be a valid timezone.',
-    'unique' => 'The :attribute has already been taken.',
+    'unique' => 'Пользователь с таким :attribute уже существует',
     'uploaded' => 'The :attribute failed to upload.',
     'url' => 'The :attribute must be a valid URL.',
     'uuid' => 'The :attribute must be a valid UUID.',
@@ -145,6 +145,30 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'phone' => [
+            'unique' => 'Пользователь с таким номером телефона уже существует!',
+            'required' => 'Пожалуйста укажите ваш телефон',
+        ],
+        'email' => [
+            'unique' => 'Пользователь с таким электронным адресом уже существует!',
+            'required' => 'Пожалуйста укажите ваш электронный адрес (email)',
+        ],
+        'first_name' => [
+            'required' => 'Пожалуйста укажите ваше имя',
+        ],
+        'last_name' => [
+            'required' => 'Пожалуйста укажите вашу фамилию',
+        ],
+        'password' => [
+            'required' => 'Пожалуйста укажите пароль',
+        ],
+        'agreement' => [
+            'required' => 'Вы не приняли условия пользовательского соглашения',
+        ],
+        'invited_id' => [
+            'required' => 'Пожалуйста укажите ID номер пригласившего вас партнера',
+            'exists' => 'ID номер пригласившего партнера не найден, пожалуйста укажите действующий номер партнера. Если вы его не знаете, пожалуйста свяжитесь с нами'
+        ], 
     ],
 
     /*

@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Программа лояльности для клиентов компании Nikkoloff®">
+    <title>Личные кабинеты партнеров компании Nikkoloff®</title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url('') }}/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url('') }}/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url('') }}/favicon-16x16.png">
+    <link rel="manifest" href="{{ url('') }}/site.webmanifest">
+    <link rel="mask-icon" href="{{ url('') }}/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+
+    <!-- Font Awesome -->
+  <!-- <link rel="stylesheet" href="{{ url('') }}/admin/plugins/fontawesome-free/css/all.min.css"> -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@100;300;400;700&display=swap" rel="stylesheet">
+
+
+   <!--  <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      .b-example-divider {
+        height: 3rem;
+        background-color: rgba(0, 0, 0, .1);
+        border: solid rgba(0, 0, 0, .15);
+        border-width: 1px 0;
+        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+      }
+
+      .b-example-vr {
+        flex-shrink: 0;
+        width: 1.5rem;
+        height: 100vh;
+      }
+
+      .bi {
+        vertical-align: -.125em;
+        fill: currentColor;
+      }
+
+      .nav-scroller {
+        position: relative;
+        z-index: 2;
+        height: 2.75rem;
+        overflow-y: hidden;
+      }
+
+      .nav-scroller .nav {
+        display: flex;
+        flex-wrap: nowrap;
+        padding-bottom: 1rem;
+        margin-top: -1px;
+        overflow-x: auto;
+        text-align: center;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+      }
+    </style> -->
+    <style>
+      .hidden {
+        opacity: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 0;
+        width: 0;
+        z-index: -1;
+      }
+    </style>
+    
+    <!-- Custom styles for this template -->
+  </head>
+  <body class="bg-light">
+    
+<div class="container">
+  <main>
+    <div class="py-5 text-center">
+      <!-- <img class="d-block mx-auto mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57"> -->
+      <h2>Регистрация в партнерских личных кабинетах</h2>
+      <div class="row justify-content-center">
+          <div class="col-md-7 col-lg-8">
+            <p class="lead">Создай дополнительный источник дохода в свободное от работы время или используй возможность начать собственное дело!</p>
+          </div>
+      </div>
+    </div>
+
+    <div class="row g-5 justify-content-center">
+      <div class="col-md-7 col-lg-8">
+        <form class="needs-validation" action="{{ route('partner_registration.store') }}" method="POST" novalidate>
+            @csrf
+          <div class="row g-3 mb-3">
+            <div class="col-sm-6">
+                <div class="form-group required input-group-lg">
+              <label for="firstName" class="form-label fs-5">Имя</label>
+              <input type="text" value="{{ old('first_name') }}" name="first_name" class="form-control" id="firstName" placeholder="" value="" required>
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="form-group required input-group-lg">
+                    <label for="lastName" class="form-label fs-5">Фамилия</label>
+                    <input type="text" value="{{ old('last_name') }}" class="form-control" name="last_name" id="lastName" placeholder="" value="" required>
+              </div>
+            </div>
+
+            <div class="col-12">
+              <div class="form-group required input-group-lg">
+                <label for="inpPhone" class="form-label fs-5">Телефон</label>
+                <input type="text" value="{{ old('phone') }}" name="phone" class="form-control js-phone" id="inpPhone" placeholder="">
+              </div>
+            </div>
+
+            <div class="col-12">
+                <div class="form-group required input-group-lg">
+                  <label for="inpInvitedId" class="form-label fs-5">ID пригласившего <span class="text-muted fw-light fs-6">номер пользователя пригласившего вас в программу</span></label>
+                  <input type="text" name="invited_id" value="{{ old('invited_id') }}" class="form-control" id="inpInvitedId" placeholder="">
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="form-group required input-group-lg">
+                  <label for="inpCity" class="form-label fs-5">Город</label>
+                  <input type="text" name="city" value="{{ old('city') }}" class="form-control" id="inpCity" placeholder="">
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="form-group required input-group-lg">
+                  <label for="state" class="form-label fs-5">Тип участия в программе</label>
+                  <select class="form-select" id="partner_type" name="partner_type" required>
+                    <option value="1">Хочу получить дополнительный доход</option>
+                    <option value="2">Хочу создать свой бизнес</option>
+                  </select>
+                </div>
+              <!-- <div class="invalid-feedback">
+                Please provide a valid state.
+              </div> -->
+            </div>
+            
+            <div class="col-12">
+                <hr class="my-5">
+            </div>
+
+            <div class="col-12">
+              <div class="form-group required input-group-lg">
+                <label for="inpEmail" class="form-label fs-5">Почта (Email) <span class="text-muted fw-light fs-6">используется для входа на сайт</span></label>
+                <input type="text" value="{{ old('email') }}"  name="email" class="form-control" id="inpEmail" placeholder="" required>
+              </div>
+            </div>
+
+            <div class="col-12">
+              <div class="form-group required input-group-lg">
+                <label for="inpEmail" class="form-label fs-5">Пароль <span class="text-muted fw-light fs-6">Минимальная длина пароля 8 символов, допускаются латинские буквы, цифры и спецсимволы</span></label>
+                <input name="password" type="password" autocomplete="new-password"  class="form-control" id="inpEmail" placeholder="" required>
+              </div>
+            </div>
+
+            <div class="col-12">
+              <div class="form-group required input-group-lg">
+                <label for="inpEmail" class="form-label fs-5">Повторите пароль</label>
+                <input type="password"  name="password_confirmation" class="form-control" id="inpEmail" placeholder="" autocomplete="new-password" required>
+              </div>
+            </div>
+
+            
+          </div>
+          <div class="row mb-5">
+            <div class="col-12">
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="save-info" name="agreement" required>
+                <label class="form-check-label" for="save-info">Принимаю условия <a href="{{ route('page', ['slug' => 'agreement']) }}" class="link-dark" target="_blank">пользовательского соглашения</a></label>
+              </div>
+            </div>
+          </div>
+
+          @if ($errors->any())
+          <div class="row">
+            <div class="col-md-12">
+              <div class="alert alert-danger">
+                <ul class="alert-danger-list--login">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+              </div>
+            </div>
+          </div>
+          @endif
+
+          <div class="row">
+              <div class="col-12">
+                  <input type="checkbox" name="newsletter" value="1" class="hidden" autocomplete="off"/>
+                  <button class="w-100 btn btn-primary btn-lg" type="submit">Зарегистрироваться</button>
+              </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <footer class="my-5 pt-5 text-muted text-center text-small">
+    <p class="mb-1">Nikkoloff® 2008–2022</p>
+    <ul class="list-inline">
+      <li class="list-inline-item"><a href="{{ route('page', ['slug' => 'o-nas']) }}" class="nav-link px-2 text-muted">О компании</a></li>
+      <li class="list-inline-item"><a href="{{ route('page', ['slug' => 'contacts']) }}" class="nav-link px-2 text-muted">Контакты</a></li>
+      <li class="list-inline-item"><a href="{{ route('page', ['slug' => 'agreement']) }}" class="nav-link px-2 text-muted">Политика конфиденциальности</a></li>
+      <li class="list-inline-item"><a href="{{ route('page', ['slug' => 'usloviya-polzovaniya-sajtom']) }}" class="nav-link px-2 text-muted">Условия пользования сайтом</a></li>
+    </ul>
+  </footer>
+</div>
+
+
+        <script src="{{ asset('js/jquery.min.js') }}"></script>
+        <script src="{{ asset('js/jquery.maskedinput.min.js') }}"></script>
+        <script src="{{ asset('js/custom.js') }}"></script>
+        <script src="{{ asset('js/app.js') }}"></script>
+      <!-- <script src="form-validation.js"></script> -->
+  </body>
+</html>

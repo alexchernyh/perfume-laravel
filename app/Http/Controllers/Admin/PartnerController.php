@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Partner;
 use App\Models\User;
 use App\Models\PartnerCategory;
+use App\Models\PartnerToCategory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -24,10 +25,7 @@ class PartnerController extends Controller
     {   
         
         $partners_cat_list = PartnerCategory::all()->toArray();
-
         $partners_count = Partner::all()->count();
-
-        // $partners_list = Partner::orderBy('id', 'desc')->get();
         $partners_list = Partner::orderBy('id', 'desc')->paginate(10);
 
         return view('admin.partner.index', [
@@ -82,6 +80,7 @@ class PartnerController extends Controller
             ]);
             $user->assignRole('user');
 
+
             // добавление партнера
             $new_partner = new Partner();
             $new_partner->first_name = $request->first_name;
@@ -92,8 +91,12 @@ class PartnerController extends Controller
             $new_partner->user_id = $user->id; //TODO: здесь вставить id из user
             $new_partner->partner_categories_id = $request->partner_categories_id; //TODO: здесь вставить id из user
             $new_partner->invited_id = $request->invited_id;
+            $new_partner->city = $request->city;
             $new_partner->reward_total = $request->reward_total;
+            $new_partner->expected_reward_total = $request->expected_reward_total;
             $new_partner->orders_total = $request->orders_total;
+            $new_partner->group_orders_total = $request->group_orders_total;
+            $new_partner->group_orders_total_all_time = $request->group_orders_total_all_time;
             $new_partner->save();
 
             return redirect()->back()->withSuccess('Новый партнер добавлен');  
@@ -120,11 +123,13 @@ class PartnerController extends Controller
      */
     public function edit($id)
     {   
-        $partners_cat_list = PartnerCategory::all()->toArray();
+        $cat_list = PartnerCategory::all()->toArray();
+        // $bioniks_list = PartnerToCategory::where('shop_id', $id)->toArray();
         $p = Partner::find($id);
         return view('admin.partner.edit', [
             'partner' => $p,
-            'cat_list' => $partners_cat_list
+            'cat_list' => $cat_list
+            // 'partners_cat_list' => $partners_cat_list,
         ]);
     }
 
@@ -158,17 +163,37 @@ class PartnerController extends Controller
         }
 
         // Обновление таблицы партнеры
-        // $partner = new Partner();
-        
+
+        $reward_total = str_replace(",", ".", $request->reward_total);
+        $reward_total = floatval($reward_total);
+
+        $expected_reward_total = str_replace(",", ".", $request->expected_reward_total);
+        $expected_reward_total = floatval($expected_reward_total);
+
+        $orders_total = str_replace(",", ".", $request->orders_total);
+        $orders_total = floatval($orders_total);
+
+        $group_orders_total = str_replace(",", ".", $request->group_orders_total);
+        $group_orders_total = floatval($group_orders_total);    
+
+        $group_orders_total_all_time = str_replace(",", ".", $request->group_orders_total_all_time);
+        $group_orders_total_all_time = floatval($group_orders_total_all_time);      
+
         $partner->first_name = $request->first_name;
         $partner->mid_name = $request->mid_name;
         $partner->last_name = $request->last_name;
         $partner->phone = $request->phone;
         $partner->email = $request->email;
+        $partner->city = $request->city;
         $partner->partner_categories_id = $request->partner_categories_id; //TODO: здесь вставить id из user
+        $partner->project1_category = $request->project1_category;
+        $partner->project2_category = $request->project2_category;
         $partner->invited_id = $request->invited_id;
-        $partner->reward_total = $request->reward_total;
-        $partner->orders_total = $request->orders_total;
+        $partner->reward_total = $reward_total;
+        $partner->expected_reward_total = $expected_reward_total;
+        $partner->orders_total = $orders_total;
+        $partner->group_orders_total = $group_orders_total;
+        $partner->group_orders_total_all_time = $group_orders_total_all_time;
         $partner->save();
 
         return redirect()->back()->withSuccess('Партнер успешно обновлен');

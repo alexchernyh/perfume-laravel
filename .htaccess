@@ -1,0 +1,8 @@
+RewriteEngine On
+
+RewriteRule /page/(.*) $1 
+
+RewriteRule ^(.*)$ public/$1 
+
+
+
